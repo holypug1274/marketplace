@@ -1,0 +1,40 @@
+:host {
+  mat-card {
+    // border: 3px solid;
+    // border-radius: 0.5rem;
+    height: 350px;
+
+    img {
+      display: block;
+      max-width: 100%;
+      max-height: 250px;
+      width: auto;
+      height: auto;
+    }
+
+    img,
+    mat-card-header {
+      transition: opacity 0.3s ease;
+    }
+  }
+
+  .hover-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  mat-card:hover {
+    img,
+    mat-card-header {
+      opacity: 0.5;
+    }
+  }
+
+  mat-card:hover .hover-button {
+    opacity: 1;
+  }
+}

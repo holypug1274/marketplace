@@ -1,4 +1,7 @@
-<marketplace-header></marketplace-header>
+<marketplace-header
+  (homeButtonClicked)="homeButtonClicked()"
+  (basketButtonClicked)="basketButtonClicked()"
+></marketplace-header>
 <div class="container">
   <router-outlet></router-outlet>
 </div>

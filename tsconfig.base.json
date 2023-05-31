@@ -15,11 +15,41 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@marketplace/web-store/data-access/api": [
+        "libs/web-store/data-access/api/src/index.ts"
+      ],
+      "@marketplace/web-store/data-access/basket": [
+        "libs/web-store/data-access/basket/src/index.ts"
+      ],
+      "@marketplace/web-store/data-access/constants": [
+        "libs/web-store/data-access/constants/src/index.ts"
+      ],
+      "@marketplace/web-store/data-access/home": [
+        "libs/web-store/data-access/home/src/index.ts"
+      ],
+      "@marketplace/web-store/data-access/types": [
+        "libs/web-store/data-access/types/src/index.ts"
+      ],
+      "@marketplace/web-store/feature/basket": [
+        "libs/web-store/feature/basket/src/index.ts"
+      ],
+      "@marketplace/web-store/feature/checkout": [
+        "libs/web-store/feature/checkout/src/index.ts"
+      ],
+      "@marketplace/web-store/feature/home": [
+        "libs/web-store/feature/home/src/index.ts"
+      ],
+      "@marketplace/web-store/feature/success": [
+        "libs/web-store/feature/success/src/index.ts"
+      ],
       "@marketplace/web-store/ui/footer": [
         "libs/web-store/ui/footer/src/index.ts"
       ],
       "@marketplace/web-store/ui/header": [
         "libs/web-store/ui/header/src/index.ts"
+      ],
+      "@marketplace/web-store/ui/product-card": [
+        "libs/web-store/ui/product-card/src/index.ts"
       ]
     }
   },

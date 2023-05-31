@@ -1,6 +1,6 @@
 <mat-toolbar>
   <div class="option">
-    <button mat-icon-button>
+    <button mat-icon-button (click)="homeButtonClicked.emit()">
       <mat-icon>home</mat-icon>
     </button>
   </div>
@@ -8,7 +8,7 @@
     <span>My Web Store</span>
   </div>
   <div class="option">
-    <button mat-icon-button>
+    <button mat-icon-button (click)="basketButtonClicked.emit()">
       <mat-icon>shopping_bag</mat-icon>
     </button>
   </div>

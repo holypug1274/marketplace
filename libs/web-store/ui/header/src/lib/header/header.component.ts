@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,4 +11,10 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent { }
+export class HeaderComponent {
+  @Output()
+  public homeButtonClicked: EventEmitter<void> = new EventEmitter<void>();
+
+  @Output()
+  public basketButtonClicked: EventEmitter<void> = new EventEmitter<void>();
+}

@@ -1,0 +1,6 @@
+<ng-container *ngFor="let product of products"
+  ><marketplace-product-card
+    [product]="product"
+    (addToCartClicked)="addToCartClicked($event)"
+  ></marketplace-product-card
+></ng-container>

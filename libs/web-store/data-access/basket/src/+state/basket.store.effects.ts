@@ -5,11 +5,12 @@ import {
 } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import {
-  delay, tap, withLatestFrom
+  delay, map, switchMap, take, tap, withLatestFrom
 } from 'rxjs/operators';
 import { basketStoreActions } from './basket.store.actions';
 import { basketStoreFeature } from './basket.store.feature';
 import { BasketStoreState } from './basket.store.state';
+import { BasketAdapterAbstract } from './basket.adapter.abstract';
 
 const SESSION_STORAGE_BASKET_KEY = 'web-store-basket'
 
@@ -19,6 +20,17 @@ export class BasketStoreEffects {
   private store: Store<BasketStoreState> = inject(Store<BasketStoreState>);
   private router: Router = inject(Router);
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+  private adapter: BasketAdapterAbstract = inject(BasketAdapterAbstract);
+
+  public listenProducts$ = createEffect(() => {
+    return this.actions$.pipe(
+      take(1), // TODO is correct? technically once susbscribed to the adapter it's fine
+      switchMap(() => this.adapter.listenProducts()),
+      map((products) => {
+        return basketStoreActions.productsLoaded({ products })
+      })
+    )
+  })
 
   // public onAddToBasketClicked$ = createEffect(() => {
   //   return this.actions$.pipe(

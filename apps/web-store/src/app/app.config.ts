@@ -1,33 +1,37 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig } from '@angular/core';
 import {
   provideRouter,
   withEnabledBlockingInitialNavigation,
 } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { StoreModule, provideStore } from '@ngrx/store';
-import { EffectsModule, provideEffects } from '@ngrx/effects';
-import { metaReducers, webStoreStoreReducers } from './+state/store.reducers';
-import { webStoreStoreInitialState } from './+state/store.state';
-import { StoreDevtoolsModule, provideStoreDevtools } from '@ngrx/store-devtools';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { AccountsStoreEffects } from './+state/store.effects';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { webStoreStoreReducers } from './+state/store.reducers';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+// import { AccountsStoreEffects } from './+state/store.effects';
 import { provideHttpClient } from '@angular/common/http';
+import { BasketAdapterAbstract } from '@marketplace/web-store/data-access/basket';
+import { BasketAdapter, HomeAdapter, SharedStoreEffects } from '@marketplace/web-store/data-access/shared';
+import { HomeAdapterAbstract } from '@marketplace/web-store/data-access/home';
+
+const ANGULAR = [provideHttpClient(), provideAnimations()];
+
+const ADAPTERS = [{ provide: BasketAdapterAbstract, useClass: BasketAdapter }, { provide: HomeAdapterAbstract, useClass: HomeAdapter }];
+
+const ROUTER = [provideRouter(appRoutes, withEnabledBlockingInitialNavigation())];
+
+const STORE = [
+  provideStore(webStoreStoreReducers),
+  provideEffects(SharedStoreEffects),
+  provideStoreDevtools()
+];
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(),
-    // StoreModule.forRoot(webStoreStoreReducers, {
-    //   initialState: webStoreStoreInitialState,
-    //   metaReducers
-    // }),
-    // EffectsModule.forRoot([]),
-    // StoreDevtoolsModule.instrument(),
-    // StoreRouterConnectingModule.forRoot()
-    provideStore(webStoreStoreReducers),
-    provideEffects(AccountsStoreEffects),
-    provideStoreDevtools(),
-    provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
-    provideAnimations(),
-  ],
+    ...ANGULAR,
+    ...ADAPTERS,
+    ...STORE,
+    ...ROUTER,
+  ]
 };

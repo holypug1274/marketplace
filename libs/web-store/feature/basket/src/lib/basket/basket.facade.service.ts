@@ -1,12 +1,12 @@
-import { basketStoreFeature } from './../../../../../data-access/basket/src/+state/basket.store.feature';
+
 
 import { Injectable, inject } from '@angular/core';
 import { HomeStoreState, homeStoreActions, homeStoreFeature } from '@marketplace/web-store/data-access/home';
 import { BasketVM, Product, ProductSummary } from '@marketplace/web-store/data-access/types';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest, map } from 'rxjs';
+import { basketStoreFeature } from '@marketplace/web-store/data-access/basket'
 
-const API_URL = 'https://fakestoreapi.com/products';
 
 @Injectable({
   providedIn: 'root'

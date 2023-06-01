@@ -7,6 +7,11 @@ import { homeStoreInitialState } from './home.store.state';
 
 export const homeStoreReducers = createReducer(
   homeStoreInitialState,
+  on(homeStoreActions.productsLoaded, (state, { products }) => {
+    return {
+      ...state, products
+    };
+  }),
   on(homeStoreActions.onAddToBasketClicked, (state, {
     product
   }) => {

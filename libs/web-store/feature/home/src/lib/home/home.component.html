@@ -1,5 +1,6 @@
-<ng-container *ngFor="let product of products"
+<ng-container *ngIf="vm$ | async as vm"
   ><marketplace-product-card
+    *ngFor="let product of vm.products"
     [product]="product"
     (addToCartClicked)="addToCartClicked($event)"
   ></marketplace-product-card

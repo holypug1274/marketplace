@@ -27,6 +27,9 @@
       "@marketplace/web-store/data-access/home": [
         "libs/web-store/data-access/home/src/index.ts"
       ],
+      "@marketplace/web-store/data-access/shared": [
+        "libs/web-store/data-access/shared/src/index.ts"
+      ],
       "@marketplace/web-store/data-access/types": [
         "libs/web-store/data-access/types/src/index.ts"
       ],

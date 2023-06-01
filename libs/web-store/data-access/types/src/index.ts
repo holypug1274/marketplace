@@ -5,3 +5,4 @@ export * from './types/Product';
 export * from './types/ProductSummary';
 export * from './types/WebStoreRoutes';
 export * from './types/BasketVM'
+export * from './types/HomeVM'

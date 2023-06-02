@@ -13,3 +13,8 @@
     </button>
   </div>
 </mat-toolbar>
+
+<mat-progress-bar
+  mode="indeterminate"
+  *ngIf="spinnerService.spinner$ | async"
+></mat-progress-bar>

@@ -1,5 +1,9 @@
 <mat-card>
-  <img mat-card-image [src]="product.image" />
+  <div
+    class="background-image"
+    [ngStyle]="{ 'background-image': 'url(' + product.image + ')' }"
+  ></div>
+  <!-- <img mat-card-image [src]="product.image" /> -->
   <mat-card-header>
     <mat-card-title
       >{{ product.title | slice : 0 : 24 }}
@@ -13,6 +17,6 @@
     class="hover-button"
     (click)="addToCartClicked.emit(product)"
   >
-    Add to Cart
+    <mat-icon>add_shopping_cart</mat-icon>Add to Cart
   </button>
 </mat-card>

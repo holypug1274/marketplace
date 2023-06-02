@@ -15,9 +15,7 @@ import { sharedStoreActions } from './shared.store.actions';
 import { SharedStoreState } from './shared.store.state';
 import { ProductsApiService } from '@marketplace/web-store/data-access/api';
 import { WebStoreRoutes } from '@marketplace/web-store/data-access/types';
-import { ROUTER_REQUEST } from '@ngrx/router-store';
-import { addProductBasketSessionStorage, getBasketSessionStorage, BasketSessionStorageService } from '@marketplace/web-store/utils';
-import { SESSION_STORAGE_BASKET_KEY } from '@marketplace/web-store/data-access/constants';
+import { BasketSessionStorageService } from '@marketplace/web-store/utils';
 
 @Injectable()
 export class SharedStoreEffects {
@@ -113,17 +111,6 @@ export class SharedStoreEffects {
   });
 
   // SESSION STORAGE
-
-  public loadSessionStorage$ = createEffect(() => {
-    return this.actions$.pipe(
-      filter(action => action.type == '@ngrx/effects/init'), //TODO this event should be checked from the router when is navigating to /home since this init event only happens when the app is loaded the first time
-      // ofType(ROUTER_REQUEST),
-      // filter(action => this.routerState.snapshot.url.indexOf('/home') != -1),
-      // tap((action) => this.sessionStorageService.setItem(SESSION_STORAGE_BASKET_KEY, getBasketSessionStorage())),
-    );
-  }, {
-    dispatch: false
-  });
 
   public addProductBasketSessionStorage$ = createEffect(() => {
     return this.actions$.pipe(

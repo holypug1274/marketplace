@@ -1,1 +1,15 @@
-<p>success works!</p>
+<ng-container *ngIf="vm$ | async as vm">
+  <h1>Order Confirmation</h1>
+  <div class="success-container">
+    <mat-card>
+      <p>Hurray! Your order is confirmed! Here's your order reference:</p>
+      <span class="order-number">{{ vm.orderNumber }}</span>
+
+      <div class="actions-container">
+        <button mat-raised-button color="primary" (click)="onGoHomeClicked()">
+          Checkout the Store
+        </button>
+      </div>
+    </mat-card>
+  </div>
+</ng-container>

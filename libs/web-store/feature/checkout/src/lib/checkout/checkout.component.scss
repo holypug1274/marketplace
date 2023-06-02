@@ -1,10 +1,40 @@
 :host {
-  .panel-container {
-    padding: 1rem;
-  }
+  mat-expansion-panel {
+    & + mat-expansion-panel {
+      margin-top: 1rem;
+    }
 
-  .actions-container {
-    padding: 1rem;
-    text-align: right;
+    mat-panel-title {
+      mat-icon {
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
+.panel-container {
+  padding: 1rem;
+}
+
+.actions-container {
+  padding: 1rem;
+  text-align: right;
+
+  @media only screen and (max-width: 768px) {
+    padding: 1rem 0;
+    text-align: center;
+    button {
+      display: block;
+      width: 100%;
+
+      & + button {
+        margin-top: 1rem;
+        margin-left: 0;
+      }
+    }
   }
 }

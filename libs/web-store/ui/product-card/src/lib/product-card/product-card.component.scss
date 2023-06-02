@@ -43,6 +43,13 @@
     transform: translate(-50%, -50%);
     opacity: 0;
     transition: opacity 0.3s ease;
+
+    @media only screen and (max-width: 1280px) {
+      font-size: 0.75rem;
+      mat-icon {
+        display: none;
+      }
+    }
   }
 
   mat-card:hover {

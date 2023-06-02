@@ -12,9 +12,9 @@ export class ProductSummaryTableFacadeService {
   private store: ProductSummaryTableStore = inject(ProductSummaryTableStore)
 
   public getVm(): Observable<ProductSummaryTableVM> {
-    return combineLatest([this.store.products$, this.store.displayedColumns$, this.store.totalPrice$, this.store.isEdit$]).pipe(
-      map(([products, displayedColumns, totalPrice, isEdit]) => {
-        return { products, displayedColumns, totalPrice, isEdit }
+    return combineLatest([this.store.products$, this.store.displayedColumns$, this.store.totalPrice$, this.store.isEdit$, this.store.useBoxShadow$]).pipe(
+      map(([products, displayedColumns, totalPrice, isEdit, useBoxShadow]) => {
+        return { products, displayedColumns, totalPrice, isEdit, useBoxShadow }
       }))
   }
 
@@ -24,6 +24,10 @@ export class ProductSummaryTableFacadeService {
 
   public setIsEdit(isEdit: boolean): void {
     this.store.setIsEdit(isEdit)
+  }
+
+  public setUseBoxShadow(useBoxShadow: boolean): void {
+    this.store.setUseBoxShadow(useBoxShadow)
   }
 
   public decreaseProductQuantityClicked(product: ProductSummary) {

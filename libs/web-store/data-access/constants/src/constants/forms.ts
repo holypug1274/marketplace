@@ -1,6 +1,21 @@
 import { Validators } from "@angular/forms";
-import { FormControl, FormGroup } from "@angular/forms";
-import { ShippingAddressForm } from "@marketplace/web-store/data-access/types";
+import { FormControl, FormGroup, ValidatorFn, AbstractControl } from '@angular/forms';
+
+//TODO validators doesn't work as expected
+
+export function creditCardNumberValidator(): ValidatorFn {
+  return (control: AbstractControl) => {
+    const isValid = (!/^[0-9]{16}$/.test(control.value));
+    return isValid ? null : { 'creditCardNumber': true };
+  };
+}
+
+export function creditCardCvvValidator(): ValidatorFn {
+  return (control: AbstractControl) => {
+    const isValid = (!/^[0-9]{3}$/.test(control.value));
+    return isValid ? null : { 'creditCardCVV': true };
+  };
+}
 
 export const shippingAddressForm = new FormGroup({
   customerName: new FormControl('', [Validators.required]),
@@ -23,7 +38,7 @@ export const billingAddressForm = new FormGroup({
 })
 
 export const paymentDetailsForm = new FormGroup({
-  ccNumber: new FormControl('', [Validators.required]),
+  ccNumber: new FormControl('', [Validators.required, creditCardNumberValidator()]),
   expDate: new FormControl('', [Validators.required]),
-  cvcCode: new FormControl('', [Validators.required]),
+  cvcCode: new FormControl('', [Validators.required, creditCardCvvValidator()]),
 })

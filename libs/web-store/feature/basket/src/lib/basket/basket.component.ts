@@ -22,7 +22,6 @@ export class BasketComponent {
   public facadeService: BasketFacadeService = inject(BasketFacadeService)
 
   public vm$: Observable<BasketVM> = this.facadeService.getVm();
-  // displayedColumns: string[] = ['image', 'id', 'title', 'quantity', 'actions', 'price-per-unit', 'price'];
 
   public checkoutClicked(): void {
     this.facadeService.checkoutClicked()

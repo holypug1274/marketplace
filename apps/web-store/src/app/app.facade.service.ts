@@ -11,11 +11,11 @@ import { sharedStoreActions } from '@marketplace/web-store/data-access/shared'
 export class AppFacadeService {
   private store: Store<WebStoreStoreState> = inject(Store<WebStoreStoreState>)
 
-  public homeButtonClicked(): void {
-    this.store.dispatch(sharedStoreActions.onHomeButtonClicked())
+  public homeClicked(): void {
+    this.store.dispatch(sharedStoreActions.onHomeClicked())
   }
 
-  public basketButtonClicked(): void {
-    this.store.dispatch(sharedStoreActions.onBasketButtonClicked())
+  public basketClicked(): void {
+    this.store.dispatch(sharedStoreActions.onBasketClicked())
   }
 }

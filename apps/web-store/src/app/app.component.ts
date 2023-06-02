@@ -15,11 +15,11 @@ import { AppFacadeService } from './app.facade.service';
 export class AppComponent {
   public facadeService: AppFacadeService = inject(AppFacadeService)
 
-  public homeButtonClicked(): void {
-    this.facadeService.homeButtonClicked()
+  public homeClicked(): void {
+    this.facadeService.homeClicked()
   }
 
-  public basketButtonClicked(): void {
-    this.facadeService.basketButtonClicked()
+  public basketClicked(): void {
+    this.facadeService.basketClicked()
   }
 }

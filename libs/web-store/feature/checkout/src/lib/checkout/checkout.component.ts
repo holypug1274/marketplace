@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CheckoutFacadeService } from './checkout.facade.service';
 import { ProductSummaryTableComponent } from '@marketplace/web-store/ui/product-summary-table';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { CheckoutVM } from '@marketplace/web-store/data-access/types';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShippingAddressFormComponent } from '@marketplace/web-store/ui/shipping-address-form'
@@ -28,28 +28,19 @@ export class CheckoutComponent {
 
   @ViewChild(MatAccordion) accordion!: MatAccordion;
 
-  public confirmOrderSummary(): void { }
 
-  public goBackToOrderSummary(): void { }
-  public confirmCustomerInformation(): void { }
+  public cancelOrder(): void {
+    this.facadeService.cancelOrderClicked()
+  }
 
-  public goBackToConfirmCustomerInformation(): void { }
   public proceedToPayment(): void {
     this.facadeService.proceedToPaymentClicked()
   }
 
-  public cancelOrder(): void { }
-  step = 0;
-
-  setStep(index: number) {
-    this.step = index;
-  }
-
-  nextStep() {
-    this.step++;
-  }
-
-  prevStep() {
-    this.step--;
+  public isShippingAddressValid(): Observable<boolean> {
+    return this.vm$.pipe(map(vm => !!vm.shippingAddress.valid &&
+      (!vm.shippingAddress.value['isBillingAddressTheSame']
+        ? vm.billingAddress.valid
+        : true)))
   }
 }

@@ -37,9 +37,9 @@ export class SharedStoreEffects {
     );
   });
 
-  public onHomeButtonCLicked$ = createEffect(() => {
+  public onHomeClicked$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(sharedStoreActions.onHomeButtonClicked),
+      ofType(sharedStoreActions.onHomeClicked),
       tap((action) => {
         this.router.navigate([WebStoreRoutes.HOME], { relativeTo: this.activatedRoute });
       }),
@@ -48,9 +48,9 @@ export class SharedStoreEffects {
     dispatch: false //routing action is dispatched automatically
   });
 
-  public onBasketButtonClicked$ = createEffect(() => {
+  public onBasketClicked$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(sharedStoreActions.onBasketButtonClicked),
+      ofType(sharedStoreActions.onBasketClicked),
       tap((action) => {
         this.router.navigate([WebStoreRoutes.BASKET], { relativeTo: this.activatedRoute });
       }),
@@ -59,7 +59,7 @@ export class SharedStoreEffects {
     dispatch: false //routing action is dispatched automatically
   });
 
-  public onCheckoutButtonClicked$ = createEffect(() => {
+  public onCheckoutClicked$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(sharedStoreActions.onCheckoutClicked),
       tap((action) => {
@@ -83,9 +83,33 @@ export class SharedStoreEffects {
 
   public onProceedToPaymentClicked$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(sharedStoreActions.onProceedToPaymentButtonClicked),
+      ofType(sharedStoreActions.onProceedToPaymentClicked),
       tap((action) => {
         this.router.navigate([WebStoreRoutes.SUCCESS], { relativeTo: this.activatedRoute });
+      }),
+    );
+  }, {
+    dispatch: false //routing action is dispatched automatically
+  });
+
+  public onCancelOrderClicked$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(sharedStoreActions.onCancelOrderClicked),
+      tap((action) => {
+        this.sessionStorageService.resetBasket();
+        this.router.navigate([WebStoreRoutes.HOME], { relativeTo: this.activatedRoute });
+      }),
+    );
+  }, {
+    dispatch: false //routing action is dispatched automatically
+  });
+
+  public onGoHomeClicked$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(sharedStoreActions.onGoHomeClicked),
+      tap((action) => {
+        this.sessionStorageService.resetBasket();
+        this.router.navigate([WebStoreRoutes.HOME], { relativeTo: this.activatedRoute });
       }),
     );
   }, {

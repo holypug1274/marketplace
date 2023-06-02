@@ -1,10 +1,21 @@
 <ng-container *ngIf="controlName && control">
-  <mat-form-field appearance="fill">
+  <mat-form-field>
     <mat-label>{{ label }}</mat-label>
-    <input matInput [formControl]="control" [placeholder]="placeholder" />
+    <input
+      matInput
+      type="text"
+      [formControl]="control"
+      [placeholder]="placeholder"
+    />
 
     <mat-error *ngIf="control.hasError('required')"
       >This field is required</mat-error
+    >
+    <mat-error *ngIf="control.hasError('creditCardNumber')"
+      >Card Number Invalid</mat-error
+    >
+    <mat-error *ngIf="control.hasError('creditCardCVV')"
+      >Card CVV Invalid</mat-error
     >
   </mat-form-field>
 </ng-container>

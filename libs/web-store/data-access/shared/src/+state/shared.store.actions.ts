@@ -2,13 +2,13 @@ import { Product, ProductSummary } from '@marketplace/web-store/data-access/type
 import { createAction, props } from '@ngrx/store';
 
 export const sharedStoreActionsDescription = {
-  onHomeButtonClicked: '[Web Store] Home Button Clicked',
-  onBasketButtonClicked: '[Web Store] Basket Button Clicked',
+  onHomeClicked: '[Web Store] Home Clicked',
+  onBasketClicked: '[Web Store] Basket Clicked',
   loadProducts: '[Home Component] Load Products',
   loadProductsSuccess: '[Home Component] Load Products Success',
   loadProductsError: '[Home Component] Load Products Error',
 
-  onAddToBasketClicked: '[Web Store - Home Component] Home Button Clicked',
+  onAddToBasketClicked: '[Web Store - Home Component] Home Clicked',
 
   onIncreaseProductQuantityClicked: '[Web Store - Basket Component] Increase Product Quantity Clicked',
   onDecreaseProductQuantityClicked: '[Web Store - Basket Component] Decrease Product Quantity Clicked',
@@ -17,12 +17,15 @@ export const sharedStoreActionsDescription = {
   onCheckoutClicked: '[Web Store - Basket Component] Checkout Clicked',
   onCheckoutTheStoreClicked: '[Web Store - Basket Component] Checkout The Store Clicked',
 
-  onProceedToPaymentButtonClicked: '[Web Store - Checkout Component] Proceed To Payment Button Clicked',
+  onProceedToPaymentClicked: '[Web Store - Checkout Component] Proceed To Payment Clicked',
+  onCancelOrderClicked: '[Web Store - Checkout Component] Cancel Order Clicked',
+
+  onGoHomeClicked: '[Web Store - Success Component] Go Home Clicked',
 };
 
 export const sharedStoreActions = {
-  onHomeButtonClicked: createAction(sharedStoreActionsDescription.onHomeButtonClicked),
-  onBasketButtonClicked: createAction(sharedStoreActionsDescription.onBasketButtonClicked),
+  onHomeClicked: createAction(sharedStoreActionsDescription.onHomeClicked),
+  onBasketClicked: createAction(sharedStoreActionsDescription.onBasketClicked),
   loadProducts: createAction(sharedStoreActionsDescription.loadProducts),
   loadProductsSuccess: createAction(sharedStoreActionsDescription.loadProductsSuccess, props<{ products: Product[] }>()),
   loadProductsError: createAction(sharedStoreActionsDescription.loadProductsError, props<{ err: Error }>()),
@@ -36,5 +39,8 @@ export const sharedStoreActions = {
   onCheckoutClicked: createAction(sharedStoreActionsDescription.onCheckoutClicked),
   onCheckoutTheStoreClicked: createAction(sharedStoreActionsDescription.onCheckoutTheStoreClicked),
 
-  onProceedToPaymentButtonClicked: createAction(sharedStoreActionsDescription.onProceedToPaymentButtonClicked),
+  onCancelOrderClicked: createAction(sharedStoreActionsDescription.onCancelOrderClicked),
+  onProceedToPaymentClicked: createAction(sharedStoreActionsDescription.onProceedToPaymentClicked),
+
+  onGoHomeClicked: createAction(sharedStoreActionsDescription.onGoHomeClicked),
 };

@@ -1,5 +1,4 @@
 import { Injectable, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import {
   Actions, createEffect, ofType
 } from '@ngrx/effects';
@@ -10,14 +9,11 @@ import {
 import { basketStoreActions } from './basket.store.actions';
 import { BasketStoreState } from './basket.store.state';
 import { BasketAdapterAbstract } from './basket.adapter.abstract';
-import { WebStoreRoutes } from '@marketplace/web-store/data-access/types';
 
 @Injectable()
 export class BasketStoreEffects {
   private actions$: Actions = inject(Actions);
   private store: Store<BasketStoreState> = inject(Store<BasketStoreState>);
-  private router: Router = inject(Router);
-  private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private adapter: BasketAdapterAbstract = inject(BasketAdapterAbstract);
 
   public listenProducts$ = createEffect(() => {
@@ -36,7 +32,7 @@ export class BasketStoreEffects {
       }),
     );
   }, {
-    dispatch: false //routing action is dispatched automatically
+    dispatch: false
   });
 
   public onIncreaseProductQuantityClicked$ = createEffect(() => {
@@ -47,7 +43,7 @@ export class BasketStoreEffects {
       }),
     );
   }, {
-    dispatch: false //routing action is dispatched automatically
+    dispatch: false
   });
 
   public onRemoveProductClicked$ = createEffect(() => {
@@ -58,7 +54,7 @@ export class BasketStoreEffects {
       }),
     );
   }, {
-    dispatch: false //routing action is dispatched automatically
+    dispatch: false
   });
 
   public onClearBasketClicked$ = createEffect(() => {
@@ -69,7 +65,7 @@ export class BasketStoreEffects {
       }),
     );
   }, {
-    dispatch: false //routing action is dispatched automatically
+    dispatch: false
   });
 
   public onCheckoutButtonCLicked$ = createEffect(() => {
@@ -80,7 +76,7 @@ export class BasketStoreEffects {
       }),
     );
   }, {
-    dispatch: false //routing action is dispatched automatically
+    dispatch: false
   });
 
   public onCheckoutTheStoreButtonCLicked$ = createEffect(() => {
@@ -91,6 +87,6 @@ export class BasketStoreEffects {
       }),
     );
   }, {
-    dispatch: false //routing action is dispatched automatically
+    dispatch: false
   });
 }

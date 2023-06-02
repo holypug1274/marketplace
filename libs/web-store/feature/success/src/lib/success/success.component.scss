@@ -1,0 +1,33 @@
+:host {
+  .success-container {
+    text-align: center;
+
+    mat-card {
+      margin: 0 auto;
+      margin-top: 20px;
+      max-width: 480px;
+      padding: 1rem;
+    }
+
+    .order-number {
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 1rem;
+    }
+
+    .actions-container {
+      margin-top: 1rem;
+      font-size: 1.25rem;
+
+      @media only screen and (max-width: 768px) {
+        padding: 1rem 0;
+        text-align: center;
+        button {
+          display: block;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

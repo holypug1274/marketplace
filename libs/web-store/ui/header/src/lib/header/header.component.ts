@@ -18,8 +18,8 @@ export class HeaderComponent {
   public spinnerService: SpinnerService = inject(SpinnerService)
 
   @Output()
-  public homeButtonClicked: EventEmitter<void> = new EventEmitter<void>();
+  public homeClicked: EventEmitter<void> = new EventEmitter<void>();
 
   @Output()
-  public basketButtonClicked: EventEmitter<void> = new EventEmitter<void>();
+  public basketClicked: EventEmitter<void> = new EventEmitter<void>();
 }

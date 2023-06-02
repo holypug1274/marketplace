@@ -36,6 +36,9 @@
       "@marketplace/web-store/data-access/shared": [
         "libs/web-store/data-access/shared/src/index.ts"
       ],
+      "@marketplace/web-store/data-access/success": [
+        "libs/web-store/data-access/success/src/index.ts"
+      ],
       "@marketplace/web-store/data-access/types": [
         "libs/web-store/data-access/types/src/index.ts"
       ],

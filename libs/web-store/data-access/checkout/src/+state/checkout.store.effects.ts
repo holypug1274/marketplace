@@ -1,5 +1,4 @@
 import { Injectable, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import {
   Actions, createEffect, ofType
 } from '@ngrx/effects';
@@ -10,14 +9,11 @@ import {
 import { checkoutStoreActions } from './checkout.store.actions';
 import { CheckoutStoreState } from './checkout.store.state';
 import { CheckoutAdapterAbstract } from './checkout.adapter.abstract';
-import { WebStoreRoutes } from '@marketplace/web-store/data-access/types';
 
 @Injectable()
 export class CheckoutStoreEffects {
   private actions$: Actions = inject(Actions);
   private store: Store<CheckoutStoreState> = inject(Store<CheckoutStoreState>);
-  private router: Router = inject(Router);
-  private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private adapter: CheckoutAdapterAbstract = inject(CheckoutAdapterAbstract);
 
   public listenProducts$ = createEffect(() => {
@@ -36,6 +32,17 @@ export class CheckoutStoreEffects {
       }),
     );
   }, {
-    dispatch: false //routing action is dispatched automatically
+    dispatch: false
+  });
+
+  public onCancelOrderClickedClicked$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(checkoutStoreActions.onCancelOrderClicked),
+      tap((action) => {
+        this.adapter.cancelOrderClicked()
+      }),
+    );
+  }, {
+    dispatch: false
   });
 }

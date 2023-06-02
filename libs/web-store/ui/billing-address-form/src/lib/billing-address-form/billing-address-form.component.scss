@@ -1,0 +1,28 @@
+:host {
+  .form-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+    marketplace-input-text {
+      width: calc(50% - 1rem);
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+
+      @media only screen and (max-width: 768px) {
+        width: 100%;
+        flex-wrap: nowrap;
+      }
+
+      &:nth-child(2n) {
+        margin-left: 1rem;
+
+        @media only screen and (max-width: 768px) {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}

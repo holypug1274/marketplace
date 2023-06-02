@@ -5,4 +5,5 @@ export interface ProductSummaryTableVM {
   displayedColumns: string[];
   isEdit: boolean;
   totalPrice: number;
+  useBoxShadow: boolean;
 }

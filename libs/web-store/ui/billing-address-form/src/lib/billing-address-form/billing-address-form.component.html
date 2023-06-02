@@ -1,6 +1,6 @@
 <ng-container *ngIf="!!_formGroup">
   <form [formGroup]="_formGroup">
-    <div>
+    <div class="form-container">
       <marketplace-input-text
         [control]="_controls['line1']"
         [controlName]="'line1'"
@@ -18,7 +18,7 @@
         label="Address Line 3"
       ></marketplace-input-text>
     </div>
-    <div>
+    <div class="form-container">
       <marketplace-input-text
         [control]="_controls['state']"
         [controlName]="'state'"

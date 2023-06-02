@@ -1,11 +1,11 @@
 import { Injectable, inject } from "@angular/core";
 import { Product } from "@marketplace/web-store/data-access/types";
 import { Observable } from "rxjs";
-import { SharedStoreState } from "../shared.store.state";
+import { SharedStoreState } from "..//+state/shared.store.state";
 import { Store } from "@ngrx/store";
-import { sharedStoreFeature } from "../shared.store.feature";
+import { sharedStoreFeature } from "..//+state/shared.store.feature";
 import { HomeAdapterAbstract } from "@marketplace/web-store/data-access/home";
-import { sharedStoreActions } from "../shared.store.actions";
+import { sharedStoreActions } from "..//+state/shared.store.actions";
 
 @Injectable()
 export class HomeAdapter extends HomeAdapterAbstract {

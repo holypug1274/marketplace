@@ -1,5 +1,5 @@
 import { FormGroup } from "@angular/forms";
-import { billingAddressForm, paymentDetailsForm, shippingAddressForm } from "@marketplace/web-store/data-access/constants"
+import { billingAddressForm, paymentDetailsForm, shippingAddressForm } from "@marketplace/web-store/data-access/constants";
 
 export function getShippingAddressForm(): FormGroup {
   return shippingAddressForm;

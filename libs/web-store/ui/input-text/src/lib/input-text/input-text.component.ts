@@ -23,4 +23,10 @@ export class InputTextComponent {
 
   @Input()
   public placeholder!: string;
+
+  constructor(
+
+  ) {
+    console.log(this.control)
+  }
 }

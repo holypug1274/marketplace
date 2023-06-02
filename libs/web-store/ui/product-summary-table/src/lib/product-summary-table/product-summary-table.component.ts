@@ -33,6 +33,11 @@ export class ProductSummaryTableComponent {
     this.facadeService.setIsEdit(isEdit)
   }
 
+  @Input()
+  public set useBoxShadow(useBoxShadow: boolean) {
+    this.facadeService.setUseBoxShadow(useBoxShadow)
+  }
+
   @Output()
   public decreaseProductQuantity: EventEmitter<ProductSummary> = new EventEmitter();
 

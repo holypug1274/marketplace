@@ -2,15 +2,10 @@
   <h1>Checkout</h1>
 
   <mat-accordion class="example-headers-align">
-    <mat-expansion-panel
-      [expanded]="step === 0"
-      (opened)="setStep(0)"
-      [disabled]="step > 0"
-      hideToggle
-    >
+    <mat-expansion-panel expanded>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon>shopping_cart</mat-icon> Order Summary
+          <mat-icon color="primary">circle</mat-icon> Order Summary
         </mat-panel-title>
       </mat-expansion-panel-header>
 
@@ -18,26 +13,31 @@
         <marketplace-product-summary-table
           [products]="vm.products"
           [isEdit]="false"
+          [useBoxShadow]="false"
         ></marketplace-product-summary-table>
       </div>
     </mat-expansion-panel>
 
-    <br />
-
-    <mat-expansion-panel
-      [expanded]="step === 1"
-      (opened)="setStep(1)"
-      [disabled]="step > 1"
-      hideToggle
-    >
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon>location_on</mat-icon> Customer Information
+          <mat-icon
+            color="warn"
+            *ngIf="(isShippingAddressValid() | async) === false"
+            >circle</mat-icon
+          >
+          <mat-icon color="primary" *ngIf="isShippingAddressValid() | async"
+            >circle</mat-icon
+          >
+          Customer Information
         </mat-panel-title>
       </mat-expansion-panel-header>
 
       <div class="panel-container">
-        <h3>Shipping Address</h3>
+        <h3 *ngIf="!vm.shippingAddress.value['isBillingAddressTheSame']">
+          Shipping Address
+        </h3>
+        <p>Fields marked with * are required</p>
         <marketplace-shipping-address-form
           [group]="vm.shippingAddress"
         ></marketplace-shipping-address-form>
@@ -53,21 +53,21 @@
       </div>
     </mat-expansion-panel>
 
-    <br />
-
-    <mat-expansion-panel
-      [expanded]="step === 2"
-      (opened)="setStep(2)"
-      [disabled]="step > 2"
-      hideToggle
-    >
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon>payments</mat-icon> Payment Details
+          <mat-icon color="warn" *ngIf="vm.paymentDetails.invalid"
+            >circle</mat-icon
+          >
+          <mat-icon color="primary" *ngIf="vm.paymentDetails.valid"
+            >circle</mat-icon
+          >
+          Payment Details
         </mat-panel-title>
       </mat-expansion-panel-header>
 
       <div class="panel-container">
+        <p>Fields marked with * are required</p>
         <marketplace-payment-details-form
           [group]="vm.paymentDetails"
         ></marketplace-payment-details-form>
@@ -84,10 +84,7 @@
       color="primary"
       (click)="proceedToPayment()"
       [disabled]="
-        vm.shippingAddress.invalid ||
-        (!vm.shippingAddress.value['isBillingAddressTheSame']
-          ? vm.billingAddress.invalid
-          : false) ||
+        (isShippingAddressValid() | async) === false ||
         vm.paymentDetails.invalid
       "
     >

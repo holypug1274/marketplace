@@ -9,3 +9,4 @@ export * from './types/HomeVM'
 export * from './types/Basket'
 export * from './types/CheckoutVM'
 export * from './types/ProductSummaryTableVM'
+export * from './types/SuccessVM';

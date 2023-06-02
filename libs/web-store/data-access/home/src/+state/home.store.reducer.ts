@@ -5,7 +5,7 @@ import {
 } from '@ngrx/store';
 import { homeStoreInitialState } from './home.store.state';
 
-export const homeStoreReducers = createReducer(
+export const homeStoreReducer = createReducer(
   homeStoreInitialState,
   on(homeStoreActions.productsLoaded, (state, { products }) => {
     return {

@@ -21,11 +21,17 @@
       "@marketplace/web-store/data-access/basket": [
         "libs/web-store/data-access/basket/src/index.ts"
       ],
+      "@marketplace/web-store/data-access/checkout": [
+        "libs/web-store/data-access/checkout/src/index.ts"
+      ],
       "@marketplace/web-store/data-access/constants": [
         "libs/web-store/data-access/constants/src/index.ts"
       ],
       "@marketplace/web-store/data-access/home": [
         "libs/web-store/data-access/home/src/index.ts"
+      ],
+      "@marketplace/web-store/data-access/product-summary-table": [
+        "libs/web-store/data-access/product-summary-table/src/index.ts"
       ],
       "@marketplace/web-store/data-access/shared": [
         "libs/web-store/data-access/shared/src/index.ts"
@@ -45,15 +51,31 @@
       "@marketplace/web-store/feature/success": [
         "libs/web-store/feature/success/src/index.ts"
       ],
+      "@marketplace/web-store/ui/billing-address-form": [
+        "libs/web-store/ui/billing-address-form/src/index.ts"
+      ],
       "@marketplace/web-store/ui/footer": [
         "libs/web-store/ui/footer/src/index.ts"
       ],
       "@marketplace/web-store/ui/header": [
         "libs/web-store/ui/header/src/index.ts"
       ],
+      "@marketplace/web-store/ui/input-text": [
+        "libs/web-store/ui/input-text/src/index.ts"
+      ],
+      "@marketplace/web-store/ui/payment-details-form": [
+        "libs/web-store/ui/payment-details-form/src/index.ts"
+      ],
       "@marketplace/web-store/ui/product-card": [
         "libs/web-store/ui/product-card/src/index.ts"
-      ]
+      ],
+      "@marketplace/web-store/ui/product-summary-table": [
+        "libs/web-store/ui/product-summary-table/src/index.ts"
+      ],
+      "@marketplace/web-store/ui/shipping-address-form": [
+        "libs/web-store/ui/shipping-address-form/src/index.ts"
+      ],
+      "@marketplace/web-store/utils": ["libs/web-store/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

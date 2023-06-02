@@ -1,0 +1,22 @@
+:host {
+  .quantity-cell {
+    button {
+      min-width: 1rem;
+    }
+  }
+
+  .total-price-container {
+    text-align: right;
+    font-size: 1.25rem;
+  }
+
+  mat-divider {
+    margin: 1rem 0;
+  }
+
+  .total-price-container {
+    .total-price {
+      font-weight: bold;
+    }
+  }
+}

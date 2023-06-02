@@ -5,14 +5,12 @@ import {
 } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import {
-  delay, map, switchMap, take, tap, withLatestFrom
+  map, tap
 } from 'rxjs/operators';
 import { basketStoreActions } from './basket.store.actions';
-import { basketStoreFeature } from './basket.store.feature';
 import { BasketStoreState } from './basket.store.state';
 import { BasketAdapterAbstract } from './basket.adapter.abstract';
-
-const SESSION_STORAGE_BASKET_KEY = 'web-store-basket'
+import { WebStoreRoutes } from '@marketplace/web-store/data-access/types';
 
 @Injectable()
 export class BasketStoreEffects {
@@ -23,30 +21,76 @@ export class BasketStoreEffects {
   private adapter: BasketAdapterAbstract = inject(BasketAdapterAbstract);
 
   public listenProducts$ = createEffect(() => {
-    return this.actions$.pipe(
-      take(1), // TODO is correct? technically once susbscribed to the adapter it's fine
-      switchMap(() => this.adapter.listenProducts()),
+    return this.adapter.listenProducts().pipe(
       map((products) => {
         return basketStoreActions.productsLoaded({ products })
       })
     )
   })
 
-  // public onAddToBasketClicked$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(basketStoreActions.onAddToBasketClicked),
-  //     delay(1),
-  //     withLatestFrom(this.store.select(basketStoreFeature.selectLastProductClicked)), //TODO should I set and then select the elmeent?
-  //     tap(([action, lastProductClicked]) => {
-  //       const basketString: string | null = sessionStorage.getItem(SESSION_STORAGE_BASKET_KEY);
-  //       const basket: { [key: number]: number } = basketString ? JSON.parse(basketString) : {};
+  public onDecreaseProductQuantityClicked$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(basketStoreActions.onDecreaseProductQuantityClicked),
+      tap((action) => {
+        this.adapter.decreaseProductClicked(action.product)
+      }),
+    );
+  }, {
+    dispatch: false //routing action is dispatched automatically
+  });
 
-  //       basket[lastProductClicked.id] ? basket[lastProductClicked.id]++ : basket[lastProductClicked.id] = 1;
+  public onIncreaseProductQuantityClicked$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(basketStoreActions.onIncreaseProductQuantityClicked),
+      tap((action) => {
+        this.adapter.increaseProductClicked(action.product)
+      }),
+    );
+  }, {
+    dispatch: false //routing action is dispatched automatically
+  });
 
-  //       sessionStorage.setItem(SESSION_STORAGE_BASKET_KEY, JSON.stringify(basket))
-  //     }),
-  //   );
-  // }, {
-  //   dispatch: false //routing action is dispatched automatically
-  // });
+  public onRemoveProductClicked$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(basketStoreActions.onRemoveProductClicked),
+      tap((action) => {
+        this.adapter.removeProductClicked(action.product)
+      }),
+    );
+  }, {
+    dispatch: false //routing action is dispatched automatically
+  });
+
+  public onClearBasketClicked$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(basketStoreActions.onClearBasketClicked),
+      tap((action) => {
+        this.adapter.clearBasketClicked()
+      }),
+    );
+  }, {
+    dispatch: false //routing action is dispatched automatically
+  });
+
+  public onCheckoutButtonCLicked$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(basketStoreActions.onCheckoutClicked),
+      tap((action) => {
+        this.adapter.checkoutClicked()
+      }),
+    );
+  }, {
+    dispatch: false //routing action is dispatched automatically
+  });
+
+  public onCheckoutTheStoreButtonCLicked$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(basketStoreActions.onCheckoutTheStoreClicked),
+      tap((action) => {
+        this.adapter.checkoutTheStoreClicked()
+      }),
+    );
+  }, {
+    dispatch: false //routing action is dispatched automatically
+  });
 }

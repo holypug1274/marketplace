@@ -6,3 +6,4 @@ export * from './+state/shared.store.state'
 
 export * from './+state/adapters/basket.adapter'
 export * from './+state/adapters/home.adapter'
+export * from './+state/adapters/checkout.adapter'

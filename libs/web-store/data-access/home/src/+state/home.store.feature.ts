@@ -1,9 +1,9 @@
 import { createFeature } from '@ngrx/store';
-import { homeStoreReducers } from './home.store.reducers';
+import { homeStoreReducer } from './home.store.reducer';
 
 export const homeStoreFeatureKey = 'home';
 
 export const homeStoreFeature = createFeature({
-	name: homeStoreFeatureKey,
-	reducer: homeStoreReducers
+  name: homeStoreFeatureKey,
+  reducer: homeStoreReducer
 });

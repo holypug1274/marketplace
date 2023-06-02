@@ -1,0 +1,80 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <table mat-table [dataSource]="vm.products" class="mat-elevation-z8">
+    <ng-container matColumnDef="image">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let product">
+        <img [src]="product.image" width="50" height="50" />
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let product">{{ product.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Title</th>
+      <td mat-cell *matCellDef="let product">{{ product.title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef>Quantity</th>
+      <td mat-cell *matCellDef="let product" class="quantity-cell">
+        <button
+          mat-button
+          (click)="decreaseProductQuantityClicked(product)"
+          *ngIf="vm.isEdit"
+        >
+          -</button
+        >{{ product.quantity
+        }}<button
+          mat-button
+          (click)="increaseProductQuantityClicked(product)"
+          *ngIf="vm.isEdit"
+        >
+          +
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let product">
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="removeProductClicked(product)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price-per-unit">
+      <th mat-header-cell *matHeaderCellDef>Unit Price</th>
+      <td mat-cell *matCellDef="let product">
+        {{ product.price | currency : 'EUR' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let product">
+        {{ product.price * product.quantity | currency : 'EUR' }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="vm.displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: vm.displayedColumns"></tr>
+  </table>
+
+  <mat-divider></mat-divider>
+
+  <div class="total-price-container">
+    Total:<span class="total-price">{{
+      vm.totalPrice | currency : 'EUR'
+    }}</span>
+  </div>
+
+  <mat-divider></mat-divider>
+</ng-container>

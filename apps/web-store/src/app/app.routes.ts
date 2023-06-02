@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import { BasketStoreEffects, basketStoreFeature } from '@marketplace/web-store/data-access/basket';
+import { CheckoutStoreEffects, checkoutStoreFeature } from '@marketplace/web-store/data-access/checkout';
 import { HomeStoreEffects, homeStoreFeature } from '@marketplace/web-store/data-access/home';
 import { WebStoreRoutes } from '@marketplace/web-store/data-access/types'
 import { provideEffects } from '@ngrx/effects';
@@ -36,7 +37,11 @@ export const appRoutes: Route[] = [
       return import('@marketplace/web-store/feature/checkout').then((m) => {
         return m.CheckoutComponent;
       });
-    }
+    },
+    providers: [
+      provideState(checkoutStoreFeature),
+      provideEffects(CheckoutStoreEffects)
+    ]
   },
   {
     path: WebStoreRoutes.SUCCESS,

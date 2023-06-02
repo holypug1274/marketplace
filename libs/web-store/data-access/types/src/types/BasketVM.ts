@@ -1,5 +1,6 @@
 import { ProductSummary } from "./ProductSummary";
 
 export interface BasketVM {
-  products: ProductSummary[]
+  products: ProductSummary[];
+  totalPrice: number;
 }

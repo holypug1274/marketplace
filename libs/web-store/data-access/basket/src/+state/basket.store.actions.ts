@@ -1,4 +1,4 @@
-import { Product, ProductSummary } from '@marketplace/web-store/data-access/types';
+import { ProductSummary } from '@marketplace/web-store/data-access/types';
 import { createAction, props } from '@ngrx/store';
 
 export const basketStoreActionsDescription = {
@@ -7,7 +7,8 @@ export const basketStoreActionsDescription = {
   onDecreaseProductQuantityClicked: '[Basket Component] Decrease Product Quantity Clicked',
   onRemoveProductClicked: '[Basket Component] Remove Product Clicked',
   onClearBasketClicked: '[Basket Component] Clear Basket Clicked',
-  onCheckoutClicked: '[Basket Component] Checkout Clicked Clicked',
+  onCheckoutClicked: '[Basket Component] Checkout Clicked',
+  onCheckoutTheStoreClicked: '[Basket Component] Checkout The Store Clicked',
 };
 
 export const basketStoreActions = {
@@ -17,4 +18,5 @@ export const basketStoreActions = {
   onRemoveProductClicked: createAction(basketStoreActionsDescription.onRemoveProductClicked, props<{ product: ProductSummary }>()),
   onClearBasketClicked: createAction(basketStoreActionsDescription.onClearBasketClicked),
   onCheckoutClicked: createAction(basketStoreActionsDescription.onCheckoutClicked),
+  onCheckoutTheStoreClicked: createAction(basketStoreActionsDescription.onCheckoutTheStoreClicked),
 };

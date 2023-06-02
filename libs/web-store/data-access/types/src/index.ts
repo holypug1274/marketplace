@@ -6,3 +6,6 @@ export * from './types/ProductSummary';
 export * from './types/WebStoreRoutes';
 export * from './types/BasketVM'
 export * from './types/HomeVM'
+export * from './types/Basket'
+export * from './types/CheckoutVM'
+export * from './types/ProductSummaryTableVM'

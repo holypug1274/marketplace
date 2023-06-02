@@ -9,14 +9,15 @@ import {
   filter,
   map,
   switchMap,
-  tap
+  tap,
 } from 'rxjs/operators';
 import { sharedStoreActions } from './shared.store.actions';
 import { SharedStoreState } from './shared.store.state';
 import { ProductsApiService } from '@marketplace/web-store/data-access/api';
 import { WebStoreRoutes } from '@marketplace/web-store/data-access/types';
-import { BasketAdapter } from './adapters/basket.adapter';
-import { BasketAdapterAbstract } from '@marketplace/web-store/data-access/basket';
+import { ROUTER_REQUEST } from '@ngrx/router-store';
+import { addProductBasketSessionStorage, getBasketSessionStorage, BasketSessionStorageService } from '@marketplace/web-store/utils';
+import { SESSION_STORAGE_BASKET_KEY } from '@marketplace/web-store/data-access/constants';
 
 @Injectable()
 export class SharedStoreEffects {
@@ -25,13 +26,15 @@ export class SharedStoreEffects {
   private router: Router = inject(Router);
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private productsApiService: ProductsApiService = inject(ProductsApiService);
-  private basketAdapter: BasketAdapterAbstract = inject(BasketAdapterAbstract);
+  private sessionStorageService: BasketSessionStorageService = inject(BasketSessionStorageService)
 
   // ROUTING
 
   public onRouterNavigated$ = createEffect(() => {
     return this.actions$.pipe(
-      filter(action => action.type == '@ngrx/effects/init'),
+      filter(action => action.type == '@ngrx/effects/init'), //TODO this event should be checked from the router when is navigating to /home since this init event only happens when the app is loaded the first time
+      // ofType(ROUTER_REQUEST),
+      // filter(action => this.routerState.snapshot.url.indexOf('/home') != -1),
       map((action) => sharedStoreActions.loadProducts()),
     );
   });
@@ -51,7 +54,40 @@ export class SharedStoreEffects {
     return this.actions$.pipe(
       ofType(sharedStoreActions.onBasketButtonClicked),
       tap((action) => {
-        this.router.navigate([WebStoreRoutes.BASKET, { relativeTo: this.activatedRoute }]);
+        this.router.navigate([WebStoreRoutes.BASKET], { relativeTo: this.activatedRoute });
+      }),
+    );
+  }, {
+    dispatch: false //routing action is dispatched automatically
+  });
+
+  public onCheckoutButtonClicked$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(sharedStoreActions.onCheckoutClicked),
+      tap((action) => {
+        this.router.navigate([WebStoreRoutes.CHECKOUT], { relativeTo: this.activatedRoute });
+      }),
+    );
+  }, {
+    dispatch: false //routing action is dispatched automatically
+  });
+
+  public onCheckoutTheStoreClicked$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(sharedStoreActions.onCheckoutTheStoreClicked),
+      tap((action) => {
+        this.router.navigate([WebStoreRoutes.HOME], { relativeTo: this.activatedRoute });
+      }),
+    );
+  }, {
+    dispatch: false //routing action is dispatched automatically
+  });
+
+  public onProceedToPaymentClicked$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(sharedStoreActions.onProceedToPaymentButtonClicked),
+      tap((action) => {
+        this.router.navigate([WebStoreRoutes.SUCCESS], { relativeTo: this.activatedRoute });
       }),
     );
   }, {
@@ -75,4 +111,30 @@ export class SharedStoreEffects {
       })
     );
   });
+
+  // SESSION STORAGE
+
+  public loadSessionStorage$ = createEffect(() => {
+    return this.actions$.pipe(
+      filter(action => action.type == '@ngrx/effects/init'), //TODO this event should be checked from the router when is navigating to /home since this init event only happens when the app is loaded the first time
+      // ofType(ROUTER_REQUEST),
+      // filter(action => this.routerState.snapshot.url.indexOf('/home') != -1),
+      // tap((action) => this.sessionStorageService.setItem(SESSION_STORAGE_BASKET_KEY, getBasketSessionStorage())),
+    );
+  }, {
+    dispatch: false
+  });
+
+  public addProductBasketSessionStorage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(sharedStoreActions.onAddToBasketClicked),
+      tap(action => {
+        this.sessionStorageService.addProduct(action.product)
+      })
+    );
+  }, {
+    dispatch: false
+  });
+
+
 }

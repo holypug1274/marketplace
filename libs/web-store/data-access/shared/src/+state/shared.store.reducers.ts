@@ -14,4 +14,11 @@ export const sharedStoreReducer = createReducer(
       ...state, products
     };
   }),
+  // on(sharedStoreActions.onAddToBasketClicked, (state, {
+  //   product
+  // }) => {
+  //   return {
+  //     ...state, products
+  //   };
+  // }),
 );

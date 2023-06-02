@@ -1,0 +1,24 @@
+<ng-container *ngIf="!!_formGroup">
+  <form [formGroup]="_formGroup">
+    <div>
+      <marketplace-input-text
+        [control]="_controls['ccNumber']"
+        [controlName]="'ccNumber'"
+        label="Card Number"
+        placeholder="5429 2122 9800 1943"
+      ></marketplace-input-text>
+      <marketplace-input-text
+        [control]="_controls['expDate']"
+        [controlName]="'expDate'"
+        label="Expiry Date"
+        placeholder="05/27"
+      ></marketplace-input-text>
+      <marketplace-input-text
+        [control]="_controls['cvcCode']"
+        [controlName]="'cvcCode'"
+        label="CVV"
+        placeholder="739"
+      ></marketplace-input-text>
+    </div>
+  </form>
+</ng-container>

@@ -1,9 +1,11 @@
-import { Product } from "@marketplace/web-store/data-access/types"
+import { Basket, Product } from "@marketplace/web-store/data-access/types"
 
 export interface SharedStoreState {
-  products: Product[]
+  products: Product[],
+  basket: Basket
 }
 
 export const initialSharedStoreState: SharedStoreState = {
-  products: []
+  products: [],
+  basket: { products: {} }
 }

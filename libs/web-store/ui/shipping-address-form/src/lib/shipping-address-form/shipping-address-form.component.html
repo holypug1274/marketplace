@@ -1,0 +1,55 @@
+<ng-container *ngIf="!!_formGroup">
+  <form [formGroup]="_formGroup">
+    <div>
+      <marketplace-input-text
+        [control]="_controls['customerName']"
+        [controlName]="'customerName'"
+        label="Customer Name"
+        placeholder="Don Joe"
+      ></marketplace-input-text>
+    </div>
+    <div>
+      <marketplace-input-text
+        [control]="_controls['line1']"
+        [controlName]="'line1'"
+        label="Address Line 1"
+        placeholder="4 Roadford Avenue, Dublin"
+      ></marketplace-input-text>
+      <marketplace-input-text
+        [control]="_controls['line2']"
+        [controlName]="'line2'"
+        label="Address Line 2"
+      ></marketplace-input-text>
+      <marketplace-input-text
+        [control]="_controls['line3']"
+        [controlName]="'line3'"
+        label="Address Line 3"
+      ></marketplace-input-text>
+    </div>
+    <div>
+      <marketplace-input-text
+        [control]="_controls['state']"
+        [controlName]="'state'"
+        label="State"
+        placeholder="Dublin"
+      ></marketplace-input-text>
+      <marketplace-input-text
+        [control]="_controls['postcode']"
+        [controlName]="'postcode'"
+        label="PostCode"
+      ></marketplace-input-text>
+      <marketplace-input-text
+        [control]="_controls['country']"
+        [controlName]="'country'"
+        label="Country"
+      ></marketplace-input-text>
+    </div>
+    <div>
+      <mat-checkbox
+        class="example-margin"
+        formControlName="isBillingAddressTheSame"
+        >Is Billing Address Same as Shipping?</mat-checkbox
+      >
+    </div>
+  </form>
+</ng-container>

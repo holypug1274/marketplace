@@ -1,13 +1,13 @@
 :host {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  .product-card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 
-  marketplace-product-card {
-    flex: 1 0 25%;
-    max-width: 23%;
-    margin: 1%;
-    position: relative;
-    overflow: hidden;
+    marketplace-product-card {
+      flex: 1 0 25%;
+      max-width: 23%;
+      margin: 1%;
+    }
   }
 }

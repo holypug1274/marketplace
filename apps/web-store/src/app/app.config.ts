@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig } from '@angular/core';
 import {
   provideRouter,
   withEnabledBlockingInitialNavigation,
@@ -9,25 +9,25 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { webStoreStoreReducers } from './+state/store.reducers';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { BasketAdapterAbstract } from '@marketplace/web-store/data-access/basket';
 import { BasketAdapter, CheckoutAdapter, HomeAdapter, SharedStoreEffects, SuccessAdapter } from '@marketplace/web-store/data-access/shared';
 import { HomeAdapterAbstract } from '@marketplace/web-store/data-access/home';
-import { BasketSessionStorageService, SpinnerInterceptor } from '@marketplace/web-store/utils';
+import { BasketSessionStorageService, spinnerInterceptor } from '@marketplace/web-store/utils';
 import { CheckoutAdapterAbstract } from '@marketplace/web-store/data-access/checkout';
 import { provideToastr } from 'ngx-toastr';
 import { SuccessAdapterAbstract } from '@marketplace/web-store/data-access/success';
 
 const ANGULAR = [
-  provideHttpClient(),
+  provideHttpClient(withInterceptors([spinnerInterceptor])),
   provideAnimations(),
   provideToastr({
     timeOut: 1500,
     positionClass: 'toast-top-center',
     preventDuplicates: false,
   }),
-  BasketSessionStorageService,
-  { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }];
+  BasketSessionStorageService
+];
 
 const ADAPTERS = [
   { provide: BasketAdapterAbstract, useClass: BasketAdapter },

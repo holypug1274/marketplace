@@ -2,10 +2,9 @@
 
 A web Application to navigate a Mock Ecommerce Store. Developed with Angular 16+ (using Standalone), Angular Material, Nx, Ngrx, Toastr.
 
-Know issues:
+Known issues:
 
-1. Interceptor not working correctly
-2. Table Resolution on small screen/size
+1. Table Resolution on small screen/size
 
 ## Requirements
 

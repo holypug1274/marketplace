@@ -4,17 +4,13 @@ import {
   on
 } from '@ngrx/store';
 import { checkoutStoreInitialState } from './checkout.store.state';
-import { getBillingAddressForm, getPaymentDetailsForm, getShippingAddressForm } from '@marketplace/web-store/utils';
 
 export const checkoutStoreReducer = createReducer(
   checkoutStoreInitialState,
   on(checkoutStoreActions.productsLoaded, (state, { products }) => {
     return {
       ...state,
-      products,
-      // shippingAddress: getShippingAddressForm(),
-      // billingAddress: getBillingAddressForm(),
-      // paymentDetails: getPaymentDetailsForm(),
+      products
     };
   })
 );

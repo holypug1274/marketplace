@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 import { ProductSummary } from '@marketplace/web-store/data-access/types';
 import { createAction, props } from '@ngrx/store';
 

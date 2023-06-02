@@ -4,15 +4,22 @@ import { FormControl, FormGroup, ValidatorFn, AbstractControl } from '@angular/f
 //TODO validators doesn't work as expected
 
 export function creditCardNumberValidator(): ValidatorFn {
-  return (control: AbstractControl) => {
-    const isValid = (!/^[0-9]{16}$/.test(control.value));
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const isValid = (/^[0-9]{16}$/.test(control.value));
     return isValid ? null : { 'creditCardNumber': true };
+  };
+}
+
+export function creditCardExpiringDateValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const isValid = (/^(0[1-9]|1[0-2])\/([0-9]{2})$/.test(control.value));
+    return isValid ? null : { 'creditCardExpiringDate': true };
   };
 }
 
 export function creditCardCvvValidator(): ValidatorFn {
   return (control: AbstractControl) => {
-    const isValid = (!/^[0-9]{3}$/.test(control.value));
+    const isValid = (/^[0-9]{3}$/.test(control.value));
     return isValid ? null : { 'creditCardCVV': true };
   };
 }
@@ -39,6 +46,6 @@ export const billingAddressForm = new FormGroup({
 
 export const paymentDetailsForm = new FormGroup({
   ccNumber: new FormControl('', [Validators.required, creditCardNumberValidator()]),
-  expDate: new FormControl('', [Validators.required]),
+  expDate: new FormControl('', [Validators.required, creditCardExpiringDateValidator()]),
   cvcCode: new FormControl('', [Validators.required, creditCardCvvValidator()]),
 })

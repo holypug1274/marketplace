@@ -17,5 +17,8 @@
     <mat-error *ngIf="control.hasError('creditCardCVV')"
       >Card CVV Invalid</mat-error
     >
+    <mat-error *ngIf="control.hasError('creditCardExpiringDate')"
+      >Card Expiring Date Invalid</mat-error
+    >
   </mat-form-field>
 </ng-container>

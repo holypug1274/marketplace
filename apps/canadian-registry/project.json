@@ -1,0 +1,120 @@
+{
+  "name": "canadian-registry",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "marketplace",
+  "sourceRoot": "apps/canadian-registry/src",
+  "tags": [],
+  "implicitDependencies": ["auth", "dashboard"],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/canadian-registry",
+        "index": "apps/canadian-registry/src/index.html",
+        "main": "apps/canadian-registry/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/canadian-registry/tsconfig.app.json",
+        "assets": [
+          "apps/canadian-registry/src/favicon.ico",
+          "apps/canadian-registry/src/assets"
+        ],
+        "styles": ["apps/canadian-registry/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/canadian-registry/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/canadian-registry/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nx/angular:module-federation-dev-server",
+      "options": {
+        "port": 4200,
+        "publicHost": "http://localhost:4200"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "canadian-registry:build:production"
+        },
+        "development": {
+          "browserTarget": "canadian-registry:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "canadian-registry:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/canadian-registry/**/*.ts",
+          "apps/canadian-registry/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/canadian-registry/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "canadian-registry:build",
+        "port": 4200
+      }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "rm -rf production && mkdir production && cp -r dist/apps/canadian-registry/* production && cp -r dist/apps/{auth,dashboard} production && http-server -p 3000 -a localhost production"
+      }
+    }
+  }
+}

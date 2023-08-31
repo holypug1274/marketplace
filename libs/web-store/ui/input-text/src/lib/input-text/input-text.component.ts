@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 
@@ -23,10 +23,4 @@ export class InputTextComponent {
 
   @Input()
   public placeholder!: string;
-
-  constructor(
-
-  ) {
-    console.log(this.control)
-  }
 }

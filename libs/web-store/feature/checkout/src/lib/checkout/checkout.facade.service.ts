@@ -24,6 +24,13 @@ export class CheckoutFacadeService {
       }))
   }
 
+  public isShippingAddressValid(): Observable<boolean> {
+    return this.getVm().pipe(map(vm => !!vm.shippingAddress.valid &&
+      (!vm.shippingAddress.value['isBillingAddressTheSame']
+        ? vm.billingAddress.valid
+        : true)))
+  }
+
   public confirmSummaryClicked(): void {
     this.store.dispatch(checkoutStoreActions.onConfirmSummaryClicked())
   }

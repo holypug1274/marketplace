@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx run web-store:serve:development"
+    "start": "nx run web-store:serve:development",
+    "build:dev:serve:web-store": "npx nx run web-store:build --configuration=development && node server.js web-store"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +24,7 @@
     "@ngrx/router-store": "~16.0.0",
     "@ngrx/store": "~16.0.0",
     "@nx/angular": "16.2.2",
+    "express": "^4.18.2",
     "ngx-toastr": "^17.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -61,6 +63,7 @@
     "jest-environment-jsdom": "^29.4.1",
     "jest-preset-angular": "~13.1.0",
     "nx": "16.2.2",
+    "nx-cloud": "^16.3.0",
     "prettier": "^2.6.2",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",

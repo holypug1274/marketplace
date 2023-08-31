@@ -11,6 +11,7 @@ npx nx generate @nx/angular:component checkout --project=web-store-feature-check
 
 npx nx generate @nx/angular:library success --directory=web-store/feature --skipModule
 npx nx generate @nx/angular:component success --project=web-store-feature-success --standalone
+npx nx generate @nx/angular:library success --directory=web-store/data-access --skipModule
 
 npx nx generate @nx/angular:library product-card --directory=web-store/ui --skipModule
 npx nx generate @nx/angular:component product-card --project=web-store-ui-product-card --standalone

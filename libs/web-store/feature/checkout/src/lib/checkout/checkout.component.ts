@@ -1,12 +1,11 @@
 import { Component, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CheckoutFacadeService } from './checkout.facade.service';
 import { ProductSummaryTableComponent } from '@marketplace/web-store/ui/product-summary-table';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CheckoutVM } from '@marketplace/web-store/data-access/types';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShippingAddressFormComponent } from '@marketplace/web-store/ui/shipping-address-form'
@@ -38,9 +37,6 @@ export class CheckoutComponent {
   }
 
   public isShippingAddressValid(): Observable<boolean> {
-    return this.vm$.pipe(map(vm => !!vm.shippingAddress.valid &&
-      (!vm.shippingAddress.value['isBillingAddressTheSame']
-        ? vm.billingAddress.valid
-        : true)))
+    return this.facadeService.isShippingAddressValid()
   }
 }
